@@ -38,7 +38,95 @@ const employee_tracker = function() {
                 console.log('Viewing All Departments: ');
                 console.table(result);
                 employee_tracker();
+            }); // adding roles
+        } else if (answers.prompt === 'View All Roles') {
+            db.query(`SELECT * FROM role`, (err, result) =>{
+                if (err) throw err;
+                console.log("Viewing All Roles: ");
+                console.table(result);
+                employee_tracker();
+            }); // adding employees
+        } else if (answers.prompt === 'View All Employee') {
+            db.query(`SELECT * FROM employee`, (err, result) =>{
+                if (err) throw err;
+                console.log("Viewing All Employees: ");
+                console.table(result);
+                employee_tracker();
+            }); // adding departments
+        } else if (answers.prompt === 'Add a Department') {
+            inquirer.prompt([{
+                // adding a department to table
+                type: 'input',
+                name: 'department',
+                message: 'What is the name of the department?',
+                validate: departmentInput => {
+                    if (departmentInput) {
+                        return true;
+                    } else {
+                        console.log('Please Add a Department!');
+                        return false;
+                    }
+                }
+            }]).then((answers) => {
+                db.query(`INSERT INTO department (name) VALUES (?)`, [answers.department], (err, result) => {
+                    if (err) throw err;
+                    console.log(`Added ${answers.department} to the database.`)
+                    employee_tracker();
+                });
+            }) // adding a role to table
+        } else if (answers.prompt === 'Add a role') {
+            db.query(`SELECT * FROM department`, (err, result) =>{
+                if (err) throw err;
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'role',
+                        message: 'What is the role?',
+                        validate: roleInput => {
+                            if(roleInput) {
+                                return true;
+                            } else {
+                                console.log('Please enter a role!');
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        // adding salary info
+                        type: 'input',
+                        name: 'salary',
+                        message: 'What is the salary for the role?',
+                        validate: salaryInput => {
+                            if (salaryInput) {
+                                return true;
+                            } else {
+                                console.log("Please enter a salary for the role!")
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        // adding a department
+                        type: 'list',
+                        name: 'department',
+                        message: 'What is the department for this role?',
+                        choices: () => {
+                            let array = [];
+                            for (let i = 0; i < result.length; i++) {
+                                array.push(result[i].name);
+                                return array;
+                            }
+                        }
+                    }
+                ]).then ((answers) => {
+                    // compare the result & store into variable
+                    for (let i= 0; i < result.length; i++) {
+                        const department = result[i];
+                        
+                    }
+                })
             })
         }
+    
     })
 }
