@@ -67,7 +67,8 @@ To install and run the Employee Tracker, follow these steps: <br>
 - https://developer.mozilla.org/en-US/
 - https://www.youtube.com/
 - https://stackoverflow.com/
-- Katie Redford, (TUTOR)
+- https://dev.mysql.com/doc/refman/8.0/en/tutorial.html
+- Geronimo Perez, (TUTOR)
 
 ## License <a name="license"></a>
 
@@ -75,7 +76,7 @@ To install and run the Employee Tracker, follow these steps: <br>
 
 ## Contact <a name="contact"></a>
 
-You may contact me by rudasilljay@gmail.com
+You may contact me by aramirezdev1@gmail.com
 
 ## Demo <a name="Demo"></a>
 
