@@ -69,5 +69,33 @@ const startApp = () => {
         connection.end();
       }
     });
-    
-}; 
+
+  // Function to show all departments in database
+  const viewAllDepartments = () => {
+    // Use connection,query to engage SQL command that usually is physcially typed out in command line
+    connection.query("SELECT * FROM department", function (err, res) {
+      if (err) throw err;
+      // console.table displays tables based on response from connection.query
+      console.table(res);
+      startApp();
+    });
+  };
+
+  // Function to view all roles within database
+const viewAllRoles = () => {
+  // The single letters represent the first letter of each table within seeds.sql. This is then connected to the corresponding label issued in the schema.sql file to display that selected data.
+  // This pulls from the employee table and joins the role table and department table data to it
+    connection.query(`SELECT 
+     r.id,
+     r.title,
+     d.name AS department,
+     r.salary
+     FROM role r
+     JOIN department d ON r.department_id = d.id`, 
+     (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        startApp();
+    });
+};
+};
