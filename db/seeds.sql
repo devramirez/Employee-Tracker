@@ -1,26 +1,37 @@
--- Insert names of departments into table of department
-INSERT INTO department
-(name)
-VALUES
-('Engineering'),
-('Sales'),
-('Accounting'),
-('Legal');
+- Department table and corresponding values
+INSERT INTO department (name)
+VALUES ("Engineering"),
+        ("Sales"),
+        ("Accounting"),
+        ("Finance"),
+        ("Legal"),
+        ("Quality Assurance"),
+        
 
--- Insert roles of employees into table employee
-INSERT INTO role
-(title, salary, department_id)
-VALUES
-('Software Engineer', 120000, 1),
-('Sales Specialist', 75000, 2),
-('Accountant', 125000, 3),
-('Counselor', 175000, 4);
+-- Role table and corresponding values
+INSERT INTO role (title, salary, department_id)
+VALUES ("Software Engineer", 130000, 1),
+        ("Staff Engineer", 160000, 1),
+        ("Sales Associate", 80000, 2),
+        ("Accountant", 125000, 3),
+        ("Financial Analyst", 115000, 4),
+        ("Attorney", 155000, 5),
+        ("QA Engineer", 75000, 6),
+        ("Account Manager", 45000, 3);
+        ("Sales Lead", 100000, 2);
 
--- Insert employee information into table employee
-INSERT INTO employee
-(first_name, last_name, role_id, manager_id)
-VALUES
-('Andrew', 'Ramirez', 1, 2),
-('Alejandro', 'Calzada', 2, 3),
-('Santiago', 'Hernandez', 3, 4),
-('Sofia', 'Campos', 1, 4);
+-- Employee table and corresponding values
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Andrew", "Ramirez", 1, 1),
+        ("John", "Snow", 3, NULL),
+        ("Mike", "Chan", 2, 2),
+        ("Stanley", "Hudson", 3, 2),
+        ("Kevin", "De Bruyne", 3, NULL),
+        ("Alejandro", "Calzada", 4, 1),
+        ("Manuel", "Ramirez", 4, NULL),
+        ("Cristiano", "Ronaldo", 4, 3),
+        ("Lionel", "Messi", 5, NULL),
+        ("Erling", "Haaland", 6, 3),
+        ("Robert", "Lewandowski", 7, NULL),
+        ("Andres", "Iniesta", 8, NULL),
+        ("Xavi", "Hernandez", 8, 1);

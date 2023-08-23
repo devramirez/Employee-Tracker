@@ -1,22 +1,32 @@
--- create department table
+-- Creating Company Database
+DROP DATABASE IF EXISTS company_db;
+CREATE DATABASE company_db;
+USE company_db;
+
+-- Adding seeds.sql tables to database
+DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS employee;
+
+-- Creating Department Table
 CREATE TABLE department (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30),
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL
 );
 
--- create table role
+-- Creating Role Table
 CREATE TABLE role (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(30),
-    salary DECIMAL,
-    department_id INTEGER,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL NOT NULL,
+    department_id INT
 );
 
--- create employee table
+-- Creating Employee Table
 CREATE TABLE employee (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    role_id INTEGER,
-    manager_id INTEGER,
+    role_id INT,
+    manager_id INT
 );
