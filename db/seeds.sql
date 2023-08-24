@@ -1,11 +1,11 @@
-- Department table and corresponding values
+-- Department table and corresponding values
 INSERT INTO department (name)
 VALUES ("Engineering"),
         ("Sales"),
         ("Accounting"),
         ("Finance"),
         ("Legal"),
-        ("Quality Assurance"),
+        ("Quality Assurance");
         
 
 -- Role table and corresponding values
@@ -17,7 +17,7 @@ VALUES ("Software Engineer", 130000, 1),
         ("Financial Analyst", 115000, 4),
         ("Attorney", 155000, 5),
         ("QA Engineer", 75000, 6),
-        ("Account Manager", 45000, 3);
+        ("Account Manager", 45000, 3),
         ("Sales Lead", 100000, 2);
 
 -- Employee table and corresponding values
