@@ -399,14 +399,55 @@ const deleteRole = () => {
             (err, res) => {
               if (err) throw err;
               console.log(`Role was successfully deleted.`);
-              startMenu();
+              startApp();
             }
           );
         } else {
           console.log('No roles were deleted.');
-          startMenu();
+          startApp();
         }
       });
   });
 };
 
+// Function to delete an employee
+const deleteEmployee = () => {
+  connection.query('SELECT * FROM employee', (err, res) => {
+    if (err) throw err;
+    const employeesNames = res.map((employee) => ({
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    }));
+    inquirer
+      .prompt([
+        {
+          name: 'employeeID',
+          type: 'list',
+          message: 'Which employee do you want to delete?',
+          choices: employeesNames,
+        },
+        {
+          name: 'confirm',
+          type: 'confirm',
+          message: 'Are you sure you want to delete this employee?',
+          default: false,
+        },
+      ])
+      .then((answer) => {
+        if (answer.confirm) {
+          connection.query(
+            'DELETE FROM employee WHERE id = ?',
+            [answer.employeeID],
+            (err, res) => {
+              if (err) throw err;
+              console.log(`Employee was successfully deleted.`);
+              startApp();
+            }
+          );
+        } else {
+          console.log('No employees were deleted.');
+          startApp();
+        }
+      });
+  })
+};
