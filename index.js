@@ -145,7 +145,7 @@ const addDepartment = () => {
             (err, res) => {
                 if (err) throw err;
                 console.log('Department successfully added!');
-                startMenu();
+                startApp();
             }
         );
     });
@@ -322,3 +322,91 @@ const addDepartment = () => {
     );
   };
 };
+
+// Extra Credit Portion
+
+// Function to delete a department
+const deleteDepartment = () => {
+  connection.query('SELECT * FROM department', (err, res) => {
+    if (err) throw err;
+    const departments = res.map((department) => ({
+      name: department.name,
+      value: department.id,
+    }));
+    inquirer
+      .prompt([
+        {
+          name: 'departmentID',
+          type: 'list',
+          message: 'Which department do you want to delete?',
+          choices: departments,
+        },
+        // Confirmation prompt to delete department
+        {
+          name: 'confirm',
+          type: 'confirm',
+          message: 'Are you sure you want to delete this department?',
+          default: false,
+        },
+      ])
+      .then((answer) => {
+        if (answer.confirm) {
+          connection.query(
+            'DELETE FROM department WHERE id = ?',
+            [answer.departmentID],
+            (err, res) => {
+              if (err) throw err;
+              console.log(`Department was successfully deleted.`);
+              startApp();
+            }
+          );
+        } else {
+          console.log('No departments were deleted.');
+          startApp();
+        }
+      });
+  });
+};
+
+// Function to delete a role
+const deleteRole = () => {
+  connection.query('SELECT * FROM role', (err, res) => {
+    if (err) throw err;
+    const roles = res.map((role) => ({
+      name: role.title,
+      value: role.id,
+    }));
+    inquirer
+      .prompt([
+        {
+          name: 'roleID',
+          type: 'list',
+          message: 'Which role do you want to delete?',
+          choices: roles,
+        },
+        {
+          name: 'confirm',
+          type: 'confirm',
+          message: 'Are you sure you want to delete this role?',
+          default: false,
+        },
+      ])
+      .then((answer) => {
+        if (answer.confirm) {
+          connection.query(
+            'DELETE FROM role WHERE id = ?',
+            [answer.roleID],
+            (err, res) => {
+              if (err) throw err;
+              console.log(`Role was successfully deleted.`);
+              startMenu();
+            }
+          );
+        } else {
+          console.log('No roles were deleted.');
+          startMenu();
+        }
+      });
+  });
+};
+
