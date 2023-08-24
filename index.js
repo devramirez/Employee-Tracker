@@ -126,6 +126,31 @@ const startApp = () => {
     );
   };
 
+  // function to add department
+const addDepartment = () => {
+  // Simple prompt to input string for department
+    inquirer.prompt([
+        {
+            name: 'department',
+            type: 'input',
+            message: 'Please enter a department.',
+    
+        },
+    ])
+    // Utilizes a connection.query to insert department into seeds.sql table based on values
+    .then(answer => {
+        connection.query(
+            'INSERT INTO department (name) VALUES (?)',
+            [answer.department],
+            (err, res) => {
+                if (err) throw err;
+                console.log('Department successfully added!');
+                startMenu();
+            }
+        );
+    });
+};
+
   // Function to add a role
   const addRole = () => {
     connection.query("SELECT id, name FROM department", (err, res) => {
